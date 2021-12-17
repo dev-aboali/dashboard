@@ -1,19 +1,21 @@
 import React from 'react'
 import "./user.css"
-
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import PublishIcon from '@mui/icons-material/Publish';
+import {Link} from 'react-router-dom'
 
 export default function User() {
     return (
         <div className="user">
             <div className="userTitleContainer">
                 <h1 className="userTitle">Edit User</h1>
-                <button className="userAddButton">Create</button>
+                <Link to="/newUser">
+                    <button className="userAddButton">Create</button>
+                </Link>
             </div>
 
             <div className="userContainer">
@@ -76,11 +78,14 @@ export default function User() {
                             </div>
                         </div>
                         <div className="userUpdateRight">
-                            <img className="userUpdateImg" src="https://media.istockphoto.com/photos/smiling-man-outdoors-in-the-city-picture-id1179420343?k=20&m=1179420343&s=612x612&w=0&h=G2UGMVSzAXGAQs3pFZpvWlHNRAzwPIWIVtSOxZHsEuc=" alt="" />
-                            <label htmlFor="file"><PublishIcon /></label>
-                            <input type="file" name="" id="file" />
-                            
+                           <div className="userUpdateUpload">
+                                <img className="userUpdateImg" src="https://media.istockphoto.com/photos/smiling-man-outdoors-in-the-city-picture-id1179420343?k=20&m=1179420343&s=612x612&w=0&h=G2UGMVSzAXGAQs3pFZpvWlHNRAzwPIWIVtSOxZHsEuc=" alt="" />
+                                    <label htmlFor="file"><PublishIcon className="userUpdateIcon" /></label>
+                                    <input type="file" name="" id="file" style={{display: "none"}}/>
+                           </div>
+                            <button className="userUpdateButton">Update</button>
                         </div>
+                        
                     </form>
                 </div>
             </div>

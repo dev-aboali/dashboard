@@ -1,23 +1,17 @@
 import React, { useState } from 'react'
-import "./userlist.css"
+import "./productList.css"
 import { DataGrid } from '@mui/x-data-grid';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import { userList } from '../../data'
+import { productRows } from '../../data'
 import { Link } from 'react-router-dom';
 
-  
- 
-  
-export default function UserList() {
-    const [data, setData] = useState(userList)
+export default function ProductList() {
+    const[data, setData] = useState(productRows)
 
-    const handleDelete = (id) => {
-        setData(data.filter(user => user.id !== id))
-    }
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'firstName', headerName: 'First name', width: 130 },
+        { field: 'product', headerName: 'Product', width: 130 },
         { field: 'lastName', headerName: 'Last name', width: 130 },
         {
           field: 'age',
@@ -26,21 +20,21 @@ export default function UserList() {
           width: 90,
         },
         {
-            field: 'user',
-            headerName: 'User',
+            field: 'product',
+            headerName: 'Product',
             width: 220,
             renderCell: (params) => {
                 return(
-                    <div className="userListUser">
-                        <img src={params.row.avatar} alt="" className="userListImg" />
-                        {params.row.username}
+                    <div className="productListItem">
+                        <img src={params.row.img} alt="" className="productListImg" />
+                        {params.row.name}
                     </div>
                 )
             }
         },
         {
-            field: 'email',
-            headerName: 'Email',
+            field: 'stock',
+            headerName: 'Stock',
             width: 130,
         },
         {
@@ -49,8 +43,8 @@ export default function UserList() {
             width: 120,
         },
         {
-            field: 'transaction',
-            headerName: 'Transaction',
+            field: 'price',
+            headerName: 'Price',
             width: 110,
         },
         {
@@ -58,13 +52,12 @@ export default function UserList() {
             headerName: 'Action',
             width: 80,
             renderCell: (params) => {
-          
                 return(
                     <>
-                        <Link to={`/users/${params.row.id}`}>
-                            <button className="userListEdit">Edit</button>
+                        <Link to={`/product/${params.row.id}`}>
+                            <button className="productListEdit">Edit</button>
                         </Link>
-                        <DeleteOutlineIcon className="userListDelete" onClick={() => handleDelete(params.row.id)} />
+                        <DeleteOutlineIcon className="productListDelete" onClick={() => handleDelete(params.row.id)} />
                     </>
                 )
             }
@@ -72,11 +65,14 @@ export default function UserList() {
     
       ];
 
-  
+    const handleDelete = (id) => {
+        setData(data.filter(user => user.id !== id))
+    }
+
     return (
-        <div className="userList">
-             <DataGrid
-                rows={data}
+        <div className="productList">
+              <DataGrid
+                rows={productRows}
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
